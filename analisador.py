@@ -4,19 +4,17 @@ import ffmpeg
 from pytubefix import YouTube
 import time
 
-# Configuração da API da OpenAI
-openai.api_key = os.getenv("OPENAI_API_KEY")  # Usa a variável de ambiente
+openai.api_key = os.getenv("OPENAI_API_KEY")  
 
 def baixar_audio(url):
     yt = YouTube(url)
     audio_stream = yt.streams.filter(only_audio=True).first()
     output_file = audio_stream.download(filename="video_audio.mp4")
 
-    # Converter para WAV (formato ideal para transcrição)
     audio_path = "video_audio.wav"
     ffmpeg.input(output_file).output(audio_path, format="wav").run(overwrite_output=True)
 
-    # Remover o arquivo MP4 original
+
     os.remove(output_file)
     return audio_path
 
@@ -24,7 +22,7 @@ def transcrever_audio(audio_path):
     with open(audio_path, "rb") as audio_file:
         try:
             response = openai.Audio.transcribe("whisper-1", audio_file)
-            os.remove(audio_path)  # Remover o arquivo após a transcrição
+            os.remove(audio_path)  
             return response["text"]
         except openai.error.RateLimitError:
             print("\u26a0\ufe0f Erro: Cota da API excedida. Tente novamente mais tarde.")
