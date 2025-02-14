@@ -1,10 +1,6 @@
 
 # 🎥 Resumo de Vídeos do YouTube com OpenAI 🎬
 
-Clique aqui para [Português-BR](#portuguese-version) | [Click here for English version](#english-version)
-
----
-
 ## 🚀 Visão Geral
 
 Este projeto tem como objetivo **extrair áudio de vídeos do YouTube**, transcrevê-lo usando a API **Whisper** da OpenAI e gerar um **resumo inteligente** com o **GPT-4**. O resumo gerado é salvo em um arquivo de texto para facilitar o acesso e a leitura.
